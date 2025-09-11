@@ -66,10 +66,10 @@ A comprehensive machine learning pipeline for predicting heart disease using var
 import joblib
 import pandas as pd
 
-# Load the trained model
+
 model = joblib.load("results/best_model.pkl")
 
-# Create sample patient data
+
 new_patient = pd.DataFrame([{
     "age": 55,
     "chol": 250,
@@ -78,10 +78,10 @@ new_patient = pd.DataFrame([{
     "cp": 2
 }])
 
-# Make prediction
+
 prediction = model.predict(new_patient)
 probability = model.predict_proba(new_patient)
 
-# Display results
+
 print("Prediction:", "Heart Disease" if prediction[0] == 1 else "No Heart Disease")
 print(f"Confidence: {probability[0].max():.2f}")
