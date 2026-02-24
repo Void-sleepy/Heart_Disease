@@ -226,30 +226,115 @@ img { max-width: 100%; display: block; }
   box-shadow: 0 0 18px var(--red-glow);
 }
 
-/* Hero image */
-.hero-image {
+/* ── Hero visual — animated cardiac monitor ─────────────────────────────────── */
+.hero-visual {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.ecg-placeholder {
-  background: #0e0e14;
-  border-radius: var(--radius);
-  padding: 32px 40px;
+.cardiac-monitor {
   width: 100%;
-  border: 1px solid var(--border);
-  box-shadow: var(--shadow-red), var(--shadow-lg);
+  background: #080a0e;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 26, 46, 0.22);
+  box-shadow: 0 0 50px rgba(255, 26, 46, 0.12), 0 0 0 1px rgba(255, 26, 46, 0.08), var(--shadow-lg);
+  overflow: hidden;
 }
 
-.ecg-svg { width: 100%; display: block; }
+.monitor-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px;
+  background: #0c0e14;
+  border-bottom: 1px solid rgba(255, 26, 46, 0.1);
+  font-size: .72rem;
+  font-weight: 600;
+  letter-spacing: .12em;
+  color: rgba(255, 26, 46, 0.6);
+  text-transform: uppercase;
+}
 
-.hero-img {
-  border-radius: var(--radius);
-  box-shadow: 0 0 60px rgba(255,26,46,.25), var(--shadow-lg);
+.monitor-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: #22c55e;
+  box-shadow: 0 0 8px #22c55e;
+  animation: blinkDot 1.5s ease-in-out infinite;
+}
+
+@keyframes blinkDot {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: .3; }
+}
+
+.monitor-hr {
+  margin-left: auto;
+  color: #22c55e;
+  font-size: .78rem;
+  font-weight: 700;
+  letter-spacing: .08em;
+}
+
+.ecg-screen {
+  position: relative;
+  padding: 28px 20px 20px;
+  background: #060810;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+/* CRT scan-line effect */
+.ecg-screen::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg, transparent, transparent 3px,
+    rgba(255,26,46,.018) 3px, rgba(255,26,46,.018) 4px
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+.heart-pulse-wrap {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  z-index: 2;
+}
+
+.heart-svg {
+  width: 90px;
+  height: 80px;
+  animation: heartbeat 1.2s ease-in-out infinite;
+  transform-origin: center;
+  filter: drop-shadow(0 0 14px rgba(255, 26, 46, 0.75));
+}
+
+.heart-shape {
+  fill: var(--red);
+}
+
+@keyframes heartbeat {
+  0%   { transform: scale(1);    }
+  12%  { transform: scale(1.20); }
+  24%  { transform: scale(1);    }
+  34%  { transform: scale(1.12); }
+  46%  { transform: scale(1);    }
+  100% { transform: scale(1);    }
+}
+
+#ecgCanvas {
   width: 100%;
-  object-fit: cover;
-  border: 1px solid var(--border);
+  height: 90px;
+  display: block;
+  border-radius: 6px;
+  z-index: 2;
+  position: relative;
 }
 
 /* ── About ──────────────────────────────────────────────────────────────────── */
@@ -527,7 +612,7 @@ legend {
 /* ── Responsive ─────────────────────────────────────────────────────────────── */
 @media (max-width: 900px) {
   .hero-grid     { grid-template-columns: 1fr; }
-  .hero-image    { display: none; }
+  .hero-visual   { display: none; }
   .cards-grid    { grid-template-columns: 1fr; }
   .form-row-3    { grid-template-columns: 1fr 1fr; }
   .result-inner  { flex-direction: column; text-align: center; }

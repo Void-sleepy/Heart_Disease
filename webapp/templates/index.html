@@ -52,30 +52,28 @@
         </div>
         <a href="#check" class="btn-primary">Start Assessment</a>
       </div>
-      <div class="hero-image">
-        <!--
-          SUGGESTED IMAGE 1:
-          A high-quality ECG / heartbeat waveform graphic on a dark or red background.
-          Good free sources: Unsplash (search "ecg heartbeat"),
-          Pexels (search "cardiology"), or Freepik (search "heart pulse medical").
-          Recommended: landscape 600x450 px, transparent or dark-themed PNG/SVG.
-          Replace the src below with your chosen image path.
-        -->
-        <img
-          src="{{ url_for('static', filename='img/red_heart.png') }}"
-          alt="ECG heartbeat waveform"
-          class="hero-img"
-          onerror="this.style.display='none'"
-        />
-        <div class="ecg-placeholder">
-          <svg viewBox="0 0 300 100" class="ecg-svg">
-            <polyline
-              points="0,50 30,50 40,50 50,10 60,90 70,50 90,50 100,40 110,50
-                      140,50 150,50 160,10 170,90 180,50 200,50 210,40 220,50 250,50 300,50"
-              fill="none" stroke="#ff1a2e" stroke-width="2.5"
-              stroke-linecap="round" stroke-linejoin="round"
-            />
-          </svg>
+      <div class="hero-visual">
+        <div class="cardiac-monitor">
+          <div class="monitor-header">
+            <div class="monitor-dot"></div>
+            <span>CARDIAC MONITOR</span>
+            <span class="monitor-hr" id="monitorHR">72 BPM</span>
+          </div>
+          <div class="ecg-screen">
+            <div class="heart-pulse-wrap">
+              <svg class="heart-svg" viewBox="0 0 100 90" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <filter id="heartGlow" x="-30%" y="-30%" width="160%" height="160%">
+                    <feGaussianBlur stdDeviation="4" result="blur"/>
+                    <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                  </filter>
+                </defs>
+                <path class="heart-shape" filter="url(#heartGlow)"
+                  d="M50 80 C30 63 8 50 8 32 C8 18 18 10 32 10 C40 10 47 14 50 22 C53 14 60 10 68 10 C82 10 92 18 92 32 C92 50 70 63 50 80Z"/>
+              </svg>
+            </div>
+            <canvas id="ecgCanvas"></canvas>
+          </div>
         </div>
       </div>
     </div>
